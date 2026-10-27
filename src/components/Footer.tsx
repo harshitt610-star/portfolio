@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
           <a
             href={PORTFOLIO_DATA.personal.github}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label="GitHub"
             style={{
               color: 'var(--muted)',
@@ -76,7 +76,7 @@ export const Footer: React.FC = () => {
           <a
             href={PORTFOLIO_DATA.personal.linkedin}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label="LinkedIn"
             style={{
               color: 'var(--muted)',

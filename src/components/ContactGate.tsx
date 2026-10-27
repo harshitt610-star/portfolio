@@ -10,7 +10,18 @@ export const ContactGate: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.name || !formState.email || !formState.message) return;
+    const cleanName = formState.name.trim();
+    const cleanEmail = formState.email.trim();
+    const cleanMessage = formState.message.trim();
+
+    if (!cleanName || !cleanEmail || !cleanMessage) return;
+
+    // Basic email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(cleanEmail)) {
+      setErrorMessage('Please provide a valid email address.');
+      return;
+    }
 
     setIsSubmitting(true);
     setErrorMessage('');
@@ -32,10 +43,10 @@ export const ContactGate: React.FC = () => {
           Accept: 'application/json'
         },
         body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          message: formState.message,
-          _subject: `New Transmission from ${formState.name} (Harshit Tiwari Portfolio)`
+          name: cleanName,
+          email: cleanEmail,
+          message: cleanMessage,
+          _subject: `New Transmission from ${cleanName} (Harshit Tiwari Portfolio)`
         })
       });
 
@@ -309,6 +320,7 @@ export const ContactGate: React.FC = () => {
                   <input
                     type="text"
                     required
+                    maxLength={80}
                     disabled={isSubmitting}
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
@@ -347,6 +359,7 @@ export const ContactGate: React.FC = () => {
                   <input
                     type="email"
                     required
+                    maxLength={120}
                     disabled={isSubmitting}
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
@@ -385,6 +398,7 @@ export const ContactGate: React.FC = () => {
                   <textarea
                     rows={4}
                     required
+                    maxLength={2000}
                     disabled={isSubmitting}
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}

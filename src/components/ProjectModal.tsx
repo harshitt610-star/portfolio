@@ -237,7 +237,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <a
               href={project.liveUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="btn-gold-primary"
               style={{ fontSize: '0.85rem', padding: '0.65rem 1.3rem' }}
             >
@@ -248,7 +248,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <a
               href={project.githubUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="btn-ghost-secondary"
               style={{ fontSize: '0.85rem', padding: '0.65rem 1.3rem' }}
             >

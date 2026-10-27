@@ -111,7 +111,7 @@ export const Navbar: React.FC = () => {
           <a
             href={PORTFOLIO_DATA.personal.github}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label="GitHub Profile"
             style={{
               width: '38px',
@@ -141,7 +141,7 @@ export const Navbar: React.FC = () => {
           <a
             href={PORTFOLIO_DATA.personal.linkedin}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
             style={{
               width: '38px',
