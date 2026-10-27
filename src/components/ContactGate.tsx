@@ -16,7 +16,14 @@ export const ContactGate: React.FC = () => {
     setErrorMessage('');
 
     try {
-      const formspreeEndpoint = `https://formspree.io/f/${PORTFOLIO_DATA.personal.formspreeId || 'xblrvvzw'}`;
+      const formspreeId = PORTFOLIO_DATA.personal.formspreeId || import.meta.env.VITE_FORMSPREE_ID;
+      if (!formspreeId) {
+        handleMailtoFallback();
+        setIsSubmitting(false);
+        return;
+      }
+
+      const formspreeEndpoint = `https://formspree.io/f/${formspreeId}`;
 
       const response = await fetch(formspreeEndpoint, {
         method: 'POST',
