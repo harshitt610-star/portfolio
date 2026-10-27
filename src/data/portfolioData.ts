@@ -36,6 +36,7 @@ export const PORTFOLIO_DATA = {
     linkedin: "https://linkedin.com/in/harshit-tiwari02",
     github: "https://github.com/harshitt610-star",
     altGithub: "https://github.com/tiwharsh51",
+    formspreeId: "xblrvvzw", // Formspree Form ID for harshitt610@gmail.com
     statusText: "Open to Opportunities · Software Developer @ Valorix Studio",
     summary:
       "React.js and TypeScript developer with 6 months of professional experience at Valorix Studio and 3 full-stack MERN projects shipped. Specializes in building high-performance simulation frontends (React Flow, AST parsers, custom SVG component models) and scalable MERN microservices.",
