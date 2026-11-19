@@ -1,6 +1,6 @@
 import React from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { Calendar, CheckCircle2, Award } from 'lucide-react';
+import { Calendar, CheckCircle2, Award, GraduationCap } from 'lucide-react';
 
 export const ExperienceTimeline: React.FC = () => {
   return (
@@ -90,6 +90,79 @@ export const ExperienceTimeline: React.FC = () => {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* Education & Academic Foundation Card */}
+        <div style={{ marginBottom: '4rem' }}>
+          <h3
+            className="font-heading"
+            style={{
+              fontSize: '1.3rem',
+              fontWeight: 700,
+              color: 'var(--gold-light)',
+              marginBottom: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}
+          >
+            <GraduationCap size={20} color="var(--gold)" /> Education & Academic Foundation
+          </h3>
+          <div
+            className="glass-panel"
+            style={{
+              borderRadius: '20px',
+              padding: '2rem 2.5rem',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1.5rem',
+              border: '1px solid rgba(216, 181, 107, 0.25)',
+              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.4)'
+            }}
+          >
+            <div>
+              <span
+                style={{
+                  fontSize: '0.75rem',
+                  fontFamily: 'var(--font-chip)',
+                  fontWeight: 600,
+                  color: 'var(--gold)',
+                  padding: '0.25rem 0.75rem',
+                  borderRadius: '9999px',
+                  background: 'rgba(216, 181, 107, 0.12)',
+                  border: '1px solid rgba(216, 181, 107, 0.25)',
+                  display: 'inline-block',
+                  marginBottom: '0.5rem'
+                }}
+              >
+                Undergraduate Degree
+              </span>
+              <h4 className="font-heading" style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text)' }}>
+                {PORTFOLIO_DATA.personal.credentials.degree}
+              </h4>
+              <p style={{ color: '#34d399', fontSize: '0.95rem', marginTop: '0.2rem' }}>
+                {PORTFOLIO_DATA.personal.credentials.college}
+              </p>
+            </div>
+            <div>
+              <div
+                style={{
+                  fontSize: '1.4rem',
+                  fontWeight: 800,
+                  fontFamily: 'var(--font-heading)',
+                  color: 'var(--gold)',
+                  textAlign: 'left'
+                }}
+              >
+                SGPA 8.5 / 10
+              </div>
+              <span style={{ fontSize: '0.85rem', color: 'var(--muted)', fontFamily: 'var(--font-chip)' }}>
+                Aug 2023 – Jun 2026
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Certifications & Badges */}

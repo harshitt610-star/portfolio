@@ -43,6 +43,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
     >
       <div
         className="glass-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-project-title"
         style={{
           width: '100%',
           maxWidth: '680px',
@@ -59,6 +62,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {/* Close Button */}
         <button
           onClick={onClose}
+          aria-label="Close modal dialog"
           style={{
             position: 'absolute',
             top: '1.25rem',
@@ -125,6 +129,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
         {/* Title */}
         <h3
+          id="modal-project-title"
           className="font-heading"
           style={{
             fontSize: 'clamp(1.75rem, 3vw, 2.2rem)',

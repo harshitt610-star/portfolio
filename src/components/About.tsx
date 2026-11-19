@@ -23,7 +23,7 @@ export const About: React.FC = () => {
   const metrics = [
     { num: '6+', label: 'Months at Valorix Studio' },
     { num: '40+', label: 'SVG Component Models Built' },
-    { num: '3+', label: 'Full-Stack MERN Platforms Shipped' },
+    { num: '4+', label: 'Production Platforms Shipped' },
     { num: '8.5', label: 'B.Tech CSE SGPA (GATE 2026)' }
   ];
 

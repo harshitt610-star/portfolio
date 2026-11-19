@@ -104,14 +104,22 @@ const BentoCard: React.FC<BentoCardProps> = ({ item, icon }) => {
   );
 };
 
-export const BentoSkills: React.FC = () => {
-  const icons = [
-    <Code size={22} color="var(--gold)" />,
-    <Server size={22} color="#34d399" />,
-    <Cpu size={22} color="#f59e0b" />,
-    <Award size={22} color="#38bdf8" />
-  ];
+const getBentoIcon = (id: string) => {
+  switch (id) {
+    case 'frontend':
+      return <Code size={22} color="var(--gold)" />;
+    case 'backend':
+      return <Server size={22} color="#34d399" />;
+    case 'simulation':
+      return <Cpu size={22} color="#f59e0b" />;
+    case 'core':
+      return <Award size={22} color="#38bdf8" />;
+    default:
+      return <Code size={22} color="var(--gold)" />;
+  }
+};
 
+export const BentoSkills: React.FC = () => {
   return (
     <section id="skills" className="section-padding" style={{ position: 'relative', zIndex: 10 }}>
       <div className="cosmic-container">
@@ -135,8 +143,8 @@ export const BentoSkills: React.FC = () => {
             gap: '1.5rem'
           }}
         >
-          {PORTFOLIO_DATA.bentoSkills.map((item, idx) => (
-            <BentoCard key={item.id} item={item} icon={icons[idx]} />
+          {PORTFOLIO_DATA.bentoSkills.map((item) => (
+            <BentoCard key={item.id} item={item} icon={getBentoIcon(item.id)} />
           ))}
         </div>
       </div>

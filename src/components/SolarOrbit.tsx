@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import type { ProjectPlanet } from '../data/portfolioData';
 import { ProjectModal } from './ProjectModal';
@@ -8,8 +8,25 @@ export const SolarOrbit: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectPlanet | null>(null);
   const [hoveredProject, setHoveredProject] = useState<ProjectPlanet | null>(null);
   const [viewMode, setViewMode] = useState<'orbit' | 'grid'>('orbit');
+  const [orbitScale, setOrbitScale] = useState(1);
 
   const projects = PORTFOLIO_DATA.planets;
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setOrbitScale(Math.max(0.42, (width - 40) / 1280));
+      } else if (width < 1024) {
+        setOrbitScale(Math.max(0.68, (width - 60) / 1300));
+      } else {
+        setOrbitScale(1);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <section id="universe" className="section-padding" style={{ position: 'relative', zIndex: 10, overflow: 'hidden' }}>
@@ -86,166 +103,182 @@ export const SolarOrbit: React.FC = () => {
             style={{
               position: 'relative',
               width: '100%',
-              minHeight: '740px',
+              minHeight: `${Math.round(860 * orbitScale)}px`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '2rem 0'
+              padding: '1.5rem 0',
+              overflow: 'hidden'
             }}
           >
-            {/* Ambient Nebula Glow Behind Sun */}
             <div
-              style={{
-                position: 'absolute',
-                width: '450px',
-                height: '450px',
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(216, 181, 107, 0.22) 0%, rgba(13, 74, 59, 0.15) 50%, transparent 70%)',
-                filter: 'blur(50px)',
-                pointerEvents: 'none'
-              }}
-            />
-
-            {/* Central Star Core (Harshit / Origin) */}
-            <div
-              className="animate-core"
               style={{
                 position: 'relative',
-                zIndex: 20,
-                width: '100px',
-                height: '100px',
-                borderRadius: '50%',
-                background: 'radial-gradient(circle at 35% 35%, #fff 0%, #f0d99d 30%, #d8b56b 70%, #996515 100%)',
+                width: '1240px',
+                height: '860px',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#06110f',
-                cursor: 'default',
-                userSelect: 'none'
+                transform: `scale(${orbitScale})`,
+                transformOrigin: 'center center',
+                transition: 'transform 0.3s ease'
               }}
             >
-              <span className="font-heading" style={{ fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.08em' }}>
-                ORIGIN
-              </span>
-              <span style={{ fontSize: '0.62rem', fontFamily: 'var(--font-chip)', fontWeight: 700 }}>HARSHIT</span>
-            </div>
+              {/* Ambient Nebula Glow Behind Sun */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: '450px',
+                  height: '450px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(216, 181, 107, 0.22) 0%, rgba(13, 74, 59, 0.15) 50%, transparent 70%)',
+                  filter: 'blur(50px)',
+                  pointerEvents: 'none'
+                }}
+              />
 
-            {/* Elliptical Orbital Rings & Planets */}
-            {projects.map((proj, idx) => {
-              // Calculate geometric positioning angle
-              const total = projects.length;
-              const angleDeg = (idx / total) * 360 + 20;
-              const angleRad = (angleDeg * Math.PI) / 180;
-              
-              // Elliptical coordinates (scale Y slightly for 3D orbital perspective)
-              const x = Math.cos(angleRad) * proj.orbitRadius;
-              const y = Math.sin(angleRad) * (proj.orbitRadius * 0.72);
+              {/* Central Star Core (Harshit / Origin) */}
+              <div
+                className="animate-core"
+                style={{
+                  position: 'relative',
+                  zIndex: 20,
+                  width: '100px',
+                  height: '100px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle at 35% 35%, #fff 0%, #f0d99d 30%, #d8b56b 70%, #996515 100%)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#06110f',
+                  cursor: 'default',
+                  userSelect: 'none'
+                }}
+              >
+                <span className="font-heading" style={{ fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.08em' }}>
+                  ORIGIN
+                </span>
+                <span style={{ fontSize: '0.62rem', fontFamily: 'var(--font-chip)', fontWeight: 700 }}>HARSHIT</span>
+              </div>
 
-              const isHovered = hoveredProject?.id === proj.id;
+              {/* Elliptical Orbital Rings & Planets */}
+              {projects.map((proj, idx) => {
+                // Calculate geometric positioning angle
+                const total = projects.length;
+                const angleDeg = (idx / total) * 360 + 20;
+                const angleRad = (angleDeg * Math.PI) / 180;
+                
+                // Elliptical coordinates (scale Y slightly for 3D orbital perspective)
+                const x = Math.cos(angleRad) * proj.orbitRadius;
+                const y = Math.sin(angleRad) * (proj.orbitRadius * 0.72);
 
-              return (
-                <React.Fragment key={proj.id}>
-                  {/* Concentric Dashed Orbit Track */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      width: `${proj.orbitRadius * 2}px`,
-                      height: `${proj.orbitRadius * 2 * 0.72}px`,
-                      borderRadius: '50%',
-                      border: '1px dashed rgba(216, 181, 107, 0.16)',
-                      pointerEvents: 'none',
-                      zIndex: 5
-                    }}
-                  />
+                const isHovered = hoveredProject?.id === proj.id;
 
-                  {/* Orbiting Planet Button */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      transform: `translate(${x}px, ${y}px)`,
-                      zIndex: isHovered ? 35 : 15,
-                      transition: 'transform 0.4s var(--ease-cine)'
-                    }}
-                  >
-                    <button
-                      onClick={() => setSelectedProject(proj)}
-                      onMouseEnter={() => setHoveredProject(proj)}
-                      onMouseLeave={() => setHoveredProject(null)}
-                      style={{
-                        width: `${proj.size}px`,
-                        height: `${proj.size}px`,
-                        borderRadius: '50%',
-                        background: `radial-gradient(circle at 30% 30%, #ffffff 0%, ${proj.color} 50%, #000000 100%)`,
-                        border: isHovered ? '2px solid #ffffff' : `1px solid ${proj.color}88`,
-                        boxShadow: isHovered
-                          ? `0 0 35px ${proj.color}, 0 0 70px ${proj.color}66`
-                          : `0 0 16px ${proj.color}44`,
-                        cursor: 'pointer',
-                        transform: isHovered ? 'scale(1.3)' : 'scale(1)',
-                        transition: 'all 0.35s var(--ease-cine)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#06110f',
-                        position: 'relative'
-                      }}
-                      aria-label={`Inspect ${proj.name}`}
-                    >
-                      <span
-                        className="font-heading"
-                        style={{
-                          fontSize: '0.72rem',
-                          fontWeight: 800,
-                          color: '#fff',
-                          textShadow: '0 1px 3px rgba(0,0,0,0.8)'
-                        }}
-                      >
-                        #{proj.id}
-                      </span>
-                    </button>
-
-                    {/* Planet Name Label Underneath */}
+                return (
+                  <React.Fragment key={proj.id}>
+                    {/* Concentric Dashed Orbit Track */}
                     <div
                       style={{
                         position: 'absolute',
-                        top: '105%',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        whiteSpace: 'nowrap',
+                        width: `${proj.orbitRadius * 2}px`,
+                        height: `${proj.orbitRadius * 2 * 0.72}px`,
+                        borderRadius: '50%',
+                        border: '1px dashed rgba(216, 181, 107, 0.16)',
                         pointerEvents: 'none',
-                        textAlign: 'center',
-                        marginTop: '4px'
+                        zIndex: 5
+                      }}
+                    />
+
+                    {/* Orbiting Planet Button */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        transform: `translate(${x}px, ${y}px)`,
+                        zIndex: isHovered ? 35 : 15,
+                        transition: 'transform 0.4s var(--ease-cine)'
                       }}
                     >
-                      <span
-                        className="font-heading"
+                      <button
+                        onClick={() => setSelectedProject(proj)}
+                        onMouseEnter={() => setHoveredProject(proj)}
+                        onMouseLeave={() => setHoveredProject(null)}
+                        onTouchStart={() => setHoveredProject(proj)}
                         style={{
-                          fontSize: '0.8rem',
-                          fontWeight: 700,
-                          color: isHovered ? 'var(--gold-light)' : 'var(--text)',
-                          textShadow: '0 2px 8px rgba(0,0,0,0.9)',
-                          display: 'block'
+                          width: `${proj.size}px`,
+                          height: `${proj.size}px`,
+                          borderRadius: '50%',
+                          background: `radial-gradient(circle at 30% 30%, #ffffff 0%, ${proj.color} 50%, #000000 100%)`,
+                          border: isHovered ? '2px solid #ffffff' : `1px solid ${proj.color}88`,
+                          boxShadow: isHovered
+                            ? `0 0 35px ${proj.color}, 0 0 70px ${proj.color}66`
+                            : `0 0 16px ${proj.color}44`,
+                          cursor: 'pointer',
+                          transform: isHovered ? 'scale(1.3)' : 'scale(1)',
+                          transition: 'all 0.35s var(--ease-cine)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: '#06110f',
+                          position: 'relative'
+                        }}
+                        aria-label={`Inspect ${proj.name}`}
+                      >
+                        <span
+                          className="font-heading"
+                          style={{
+                            fontSize: '0.72rem',
+                            fontWeight: 800,
+                            color: '#fff',
+                            textShadow: '0 1px 3px rgba(0,0,0,0.8)'
+                          }}
+                        >
+                          #{proj.id}
+                        </span>
+                      </button>
+
+                      {/* Planet Name Label Underneath */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '105%',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          whiteSpace: 'nowrap',
+                          pointerEvents: 'none',
+                          textAlign: 'center',
+                          marginTop: '4px'
                         }}
                       >
-                        {proj.name}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: '0.65rem',
-                          color: 'var(--muted)',
-                          fontFamily: 'var(--font-chip)',
-                          display: 'block'
-                        }}
-                      >
-                        {proj.category}
-                      </span>
+                        <span
+                          className="font-heading"
+                          style={{
+                            fontSize: '0.8rem',
+                            fontWeight: 700,
+                            color: isHovered ? 'var(--gold-light)' : 'var(--text)',
+                            textShadow: '0 2px 8px rgba(0,0,0,0.9)',
+                            display: 'block'
+                          }}
+                        >
+                          {proj.name}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '0.65rem',
+                            color: 'var(--muted)',
+                            fontFamily: 'var(--font-chip)',
+                            display: 'block'
+                          }}
+                        >
+                          {proj.category}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </React.Fragment>
-              );
-            })}
+                  </React.Fragment>
+                );
+              })}
+            </div>
           </div>
         )}
 
@@ -331,6 +364,11 @@ export const SolarOrbit: React.FC = () => {
                   </div>
 
                   <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedProject(proj);
+                    }}
                     className="btn-gold-primary"
                     style={{
                       width: '100%',

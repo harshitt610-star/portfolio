@@ -36,10 +36,11 @@ export const PORTFOLIO_DATA = {
     linkedin: "https://linkedin.com/in/harshit-tiwari02",
     github: "https://github.com/harshitt610-star",
     altGithub: "https://github.com/tiwharsh51",
-    formspreeId: import.meta.env.VITE_FORMSPREE_ID || "",
+    resumeUrl: "/Harshit_Tiwari_Resume.pdf",
+    formspreeId: import.meta.env.VITE_FORMSPREE_ID || "mdeegnrl",
     statusText: "Open to Opportunities · Software Developer @ Valorix Studio",
     summary:
-      "React.js and TypeScript developer with 6 months of professional experience at Valorix Studio and 3 full-stack MERN projects shipped. Specializes in building high-performance simulation frontends (React Flow, AST parsers, custom SVG component models) and scalable MERN microservices.",
+      "React.js and TypeScript developer with 6 months of professional experience at Valorix Studio and 4+ production platforms and MERN systems shipped. Specializes in building high-performance simulation frontends (React Flow, AST parsers, custom SVG component models) and scalable full-stack web architectures.",
     credentials: {
       gate: "GATE CSE 2026 Qualified",
       degree: "B.Tech in Computer Science & Engineering",
@@ -64,8 +65,8 @@ export const PORTFOLIO_DATA = {
       ],
       tech: ["React.js", "TypeScript", "React Flow", "MicroPython AST", "SVG Engine", "RP2040"],
       color: "#d8b56b", // Astral Gold
-      orbitRadius: 190,
-      size: 78,
+      orbitRadius: 180,
+      size: 76,
       speed: "25s",
       isCollab: true
     },
@@ -84,7 +85,7 @@ export const PORTFOLIO_DATA = {
       ],
       tech: ["TypeScript", "React + Vite", "Express.js", "Expo", "Zod", "Vitest", "Tailwind CSS"],
       color: "#f59e0b", // Amber Sun
-      orbitRadius: 270,
+      orbitRadius: 250,
       size: 70,
       speed: "32s",
       githubUrl: "https://github.com/harshitt610-star/childrens-digital-library"
@@ -104,7 +105,7 @@ export const PORTFOLIO_DATA = {
       ],
       tech: ["React.js", "Node.js", "Express.js", "MongoDB", "AI Models", "Weather APIs", "Tailwind CSS"],
       color: "#10b981", // Emerald Jade
-      orbitRadius: 350,
+      orbitRadius: 320,
       size: 66,
       speed: "40s",
       liveUrl: "https://farmixai.vercel.app",
@@ -125,7 +126,7 @@ export const PORTFOLIO_DATA = {
       ],
       tech: ["React.js", "Node.js", "MongoDB", "JWT Auth", "Express.js", "Vercel"],
       color: "#38bdf8", // Sky Cyan
-      orbitRadius: 430,
+      orbitRadius: 390,
       size: 62,
       speed: "48s",
       liveUrl: "https://gatehub-two.vercel.app",
@@ -146,7 +147,7 @@ export const PORTFOLIO_DATA = {
       ],
       tech: ["TypeScript", "Node.js", "Express.js", "MongoDB", "REST APIs", "React"],
       color: "#ec4899", // Neon Rose
-      orbitRadius: 510,
+      orbitRadius: 460,
       size: 58,
       speed: "56s",
       githubUrl: "https://github.com/harshitt610-star"
@@ -166,10 +167,31 @@ export const PORTFOLIO_DATA = {
       ],
       tech: ["React.js", "Express.js", "MongoDB Aggregation", "JWT", "Bcrypt", "Tailwind CSS"],
       color: "#a855f7", // Violet Nebula
-      orbitRadius: 590,
+      orbitRadius: 530,
       size: 54,
       speed: "64s",
       isCollab: true
+    },
+    {
+      id: "07",
+      name: "Read Pustak with Avni",
+      tagline: "Live Literacy & Young Author Publishing Platform",
+      category: "EdTech & Web Publishing Ecosystem",
+      role: "Full-Stack Web Architect & Lead Developer",
+      description:
+        "Official online literary portal and publishing ecosystem powering the 'Ek Bachcha, Ek Pustak Padhe' nationwide youth literacy initiative, featuring an interactive book catalog, young-author publishing mentorship workflows, and school outreach drives.",
+      highlights: [
+        "Architected high-conversion landing and catalog showcase spotlighting 4+ published titles with multi-platform distribution (Amazon & Flipkart)",
+        "Engineered end-to-end young author publishing pipeline—facilitating manuscript submission, editorial mentorship, and custom cover design inquiries",
+        "Built community interaction engine for school reading workshops, social philanthropy tracking, and direct WhatsApp / email secretariat channels"
+      ],
+      tech: ["React.js", "TypeScript", "Tailwind CSS", "Vite", "REST APIs", "SEO & OpenGraph", "Responsive UX"],
+      color: "#06b6d4", // Electric Cyan
+      orbitRadius: 600,
+      size: 50,
+      speed: "72s",
+      liveUrl: "https://www.readpustakwithavni.com/",
+      githubUrl: "https://github.com/harshitt610-star/childrens-digital-library"
     }
   ] as ProjectPlanet[],
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { GithubIcon, LinkedinIcon } from './Icons';
-import { Mail, ArrowUp } from 'lucide-react';
+import { Mail, ArrowUp, Download } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -103,6 +103,28 @@ export const Footer: React.FC = () => {
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
           >
             <Mail size={18} />
+          </a>
+
+          <a
+            href={PORTFOLIO_DATA.personal.resumeUrl}
+            download="Harshit_Tiwari_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download Resume"
+            title="Download Resume"
+            style={{
+              color: 'var(--muted)',
+              transition: 'color 0.2s ease',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              fontSize: '0.8rem',
+              textDecoration: 'none'
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
+          >
+            <Download size={16} /> Resume
           </a>
 
           <button

@@ -1,6 +1,6 @@
 import React from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { ArrowRight, Cpu, Terminal, Award } from 'lucide-react';
+import { ArrowRight, Cpu, Terminal, Award, Download } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -115,6 +115,16 @@ export const Hero: React.FC = () => {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
               <a href="#universe" className="btn-gold-primary">
                 Explore My Universe <ArrowRight size={18} />
+              </a>
+              <a
+                href={PORTFOLIO_DATA.personal.resumeUrl}
+                download="Harshit_Tiwari_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-ghost-secondary"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+              >
+                <Download size={16} /> Resume
               </a>
               <a href="#contact" className="btn-ghost-secondary">
                 Get In Touch

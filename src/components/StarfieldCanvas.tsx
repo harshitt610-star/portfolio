@@ -5,7 +5,8 @@ export const StarfieldCanvas: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const currentContainer = containerRef.current;
+    if (!currentContainer) return;
 
     // Scene & Camera
     const scene = new THREE.Scene();
@@ -21,7 +22,7 @@ export const StarfieldCanvas: React.FC = () => {
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    containerRef.current.appendChild(renderer.domElement);
+    currentContainer.appendChild(renderer.domElement);
 
     // Particle Stars
     const particleCount = 750;
@@ -107,8 +108,8 @@ export const StarfieldCanvas: React.FC = () => {
       renderer.dispose();
       geometry.dispose();
       material.dispose();
-      if (containerRef.current?.contains(renderer.domElement)) {
-        containerRef.current.removeChild(renderer.domElement);
+      if (currentContainer && currentContainer.contains(renderer.domElement)) {
+        currentContainer.removeChild(renderer.domElement);
       }
     };
   }, []);

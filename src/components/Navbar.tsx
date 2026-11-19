@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { GithubIcon, LinkedinIcon } from './Icons';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -168,6 +168,27 @@ export const Navbar: React.FC = () => {
             <LinkedinIcon size={17} />
           </a>
 
+          {/* Download Resume Button (Desktop) */}
+          <a
+            href={PORTFOLIO_DATA.personal.resumeUrl}
+            download="Harshit_Tiwari_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download Harshit Tiwari Resume"
+            className="btn-gold-primary resume-desktop"
+            style={{
+              padding: '0.45rem 0.95rem',
+              fontSize: '0.78rem',
+              gap: '0.4rem',
+              textDecoration: 'none',
+              borderRadius: '9999px',
+              display: 'none',
+              boxShadow: '0 0 16px rgba(216, 181, 107, 0.25)'
+            }}
+          >
+            <Download size={14} /> Resume
+          </a>
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -217,10 +238,35 @@ export const Navbar: React.FC = () => {
               {link.label}
             </a>
           ))}
+
+          {/* Mobile Drawer Resume Download Button */}
+          <a
+            href={PORTFOLIO_DATA.personal.resumeUrl}
+            download="Harshit_Tiwari_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMobileMenuOpen(false)}
+            className="btn-gold-primary"
+            style={{
+              marginTop: '0.5rem',
+              justifyContent: 'center',
+              padding: '0.65rem 1.25rem',
+              fontSize: '0.9rem',
+              gap: '0.5rem',
+              textDecoration: 'none'
+            }}
+          >
+            <Download size={16} /> Download Resume (PDF)
+          </a>
         </div>
       )}
 
       <style>{`
+        @media (min-width: 640px) {
+          .resume-desktop {
+            display: inline-flex !important;
+          }
+        }
         @media (min-width: 900px) {
           .desktop-nav {
             display: flex !important;
